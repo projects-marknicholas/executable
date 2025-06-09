@@ -42,17 +42,27 @@ if %errorlevel% neq 0 (
   exit /b
 )
 
-:: Install and start RHU
-echo Installing and starting RHU...
+:: === RHU ===
+echo Setting up RHU...
 cd rhu
-call npm install
+if exist "node_modules\" (
+  echo node_modules already exists. Skipping npm install...
+) else (
+  echo Installing dependencies for RHU...
+  call npm install
+)
 start cmd /k "npm start & echo. & echo === RHU Test Account === & echo Email: testuser@gmail.com & echo Password: Test123"
 cd ..
 
-:: Install and start RHU-ADMIN
-echo Installing and starting RHU-ADMIN...
+:: === RHU-ADMIN ===
+echo Setting up RHU-ADMIN...
 cd rhu-admin
-call npm install
+if exist "node_modules\" (
+  echo node_modules already exists. Skipping npm install...
+) else (
+  echo Installing dependencies for RHU-ADMIN...
+  call npm install
+)
 start cmd /k "npm start & echo. & echo === RHU-ADMIN Test Account === & echo Email: testadmin@gmail.com & echo Password: Test123"
 cd ..
 
