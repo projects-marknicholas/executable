@@ -1,0 +1,258 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import PageTransition from '../../../animations/page-transition';
+import Swal from 'sweetalert2';
+import { register } from "../../../api/auth";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+const UserRegister = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "", 
+    email: "",
+    password: "",
+    confirm_password: "",
+    latitude: "",
+    longitude: "",
+    selfie: null
+  });
+
+  const [showMap, setShowMap] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
+  const [cameraFacingMode, setCameraFacingMode] = useState('user');
+  const [marker, setMarker] = useState(null);
+  const [acceptedDisclaimer, setAcceptedDisclaimer] = useState(false);
+  const videoRef = useRef(null);
+  const streamRef = useRef(null);
+
+  useEffect(() => {
+    document.title = 'Register - RHU Disease Monitoring';
+    return () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData({...formData, [e.target.name]: e.target.value});
+  };
+
+  const showDisclaimer = () => {
+    Swal.fire({
+      title: 'Data Collection Disclaimer',
+      html: `<div style="text-align: left;">
+        <p>By registering with our service, you agree to:</p>
+        <ul>
+          <li>Allow collection of your personal information</li>
+          <li>Allow use of this information for disease monitoring</li>
+          <li>Receive health notifications</li>
+        </ul>
+      </div>`,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'I Accept',
+      cancelButtonText: 'Decline',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setAcceptedDisclaimer(true);
+        proceedWithRegistration();
+      } else {
+        Swal.fire('Cancelled', 'You must accept the disclaimer to register.', 'info');
+      }
+    });
+  };
+
+  const proceedWithRegistration = async () => {
+    const result = await register(formData);
+    if (result.status === 'success') {
+      Swal.fire('Success!', result.message, 'success');
+      navigate('/');
+    } else {
+      Swal.fire('Error!', result.message, 'error');
+    }
+  };
+
+  const handleSetAddress = () => {
+    setShowMap(true);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setFormData(prev => ({...prev, latitude, longitude}));
+        initMap(latitude, longitude);
+      },
+      () => initMap(14.5995, 120.9842)
+    );
+  };
+
+  const initMap = (lat, lng) => {
+    const map = L.map("map-container").setView([lat, lng], 15);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+
+    const newMarker = L.marker([lat, lng], {
+      draggable: true,
+      icon: L.divIcon({
+        html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0339A8" width="32px" height="32px">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>`,
+        className: 'svg-marker-icon',
+        iconSize: [32, 32]
+      })
+    }).addTo(map);
+
+    setMarker(newMarker);
+    newMarker.on("dragend", () => {
+      const { lat, lng } = newMarker.getLatLng();
+      setFormData(prev => ({...prev, latitude: lat, longitude: lng}));
+    });
+  };
+
+  const handleConfirmLocation = () => {
+    Swal.fire({
+      title: 'Confirm Home Address',
+      text: 'Is this your correct home address?',
+      icon: 'question',
+      showCancelButton: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setShowMap(false);
+        startCamera();
+      }
+    });
+  };
+
+  const startCamera = async () => {
+    try {
+      setShowCamera(true);
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: cameraFacingMode }
+      });
+      videoRef.current.srcObject = stream;
+      streamRef.current = stream;
+    } catch (err) {
+      Swal.fire('Error', 'Could not access camera.', 'error');
+      setShowCamera(false);
+    }
+  };
+
+  const stopCamera = () => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
+    }
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
+  };
+
+  const captureSelfie = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = videoRef.current.videoWidth;
+    canvas.height = videoRef.current.videoHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+    setFormData(prev => ({...prev, selfie: canvas.toDataURL('image/jpeg')}));
+    stopCamera();
+    setShowCamera(false);
+  };
+
+  const toggleCamera = async () => {
+    stopCamera();
+    setCameraFacingMode(prev => prev === 'user' ? 'environment' : 'user');
+    await startCamera();
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.latitude || !formData.longitude) {
+      Swal.fire('Error!', 'Please set your home address first.', 'error');
+      return;
+    }
+    if (!acceptedDisclaimer) {
+      showDisclaimer();
+      return;
+    }
+    proceedWithRegistration();
+  };
+
+  return (
+    <PageTransition>
+      <div className='user'>
+        <div className="main-log">
+          <div className="top">
+            <div className='app'>
+              <div className="logo">
+                <img src='' alt='Logo'/>
+              </div>
+              <div className="app-name">
+                <div>Symp TrackLB</div>
+              </div>
+            </div>
+          </div>
+          
+          {!showMap && !showCamera ? (
+            <form className="bottom" onSubmit={handleSubmit}>
+              <div className='under'>
+                <div className="form-group">
+                  <div className="inputs">
+                    <label htmlFor="first_name">First Name<br/>
+                      <input type="text" id="first_name" name="first_name" value={formData.first_name} onChange={handleChange} required />
+                    </label><br/>
+                    <label htmlFor="last_name">Last Name<br/>
+                      <input type="text" id="last_name" name="last_name" value={formData.last_name} onChange={handleChange} required />
+                    </label><br/>
+                    <label htmlFor="email">Email<br/>
+                      <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+                    </label><br/>
+                    <label htmlFor="password">Password<br/>
+                      <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
+                    </label><br/>
+                    <label htmlFor="confirm_password">Confirm Password<br/>
+                      <input type="password" id="confirm_password" name="confirm_password" value={formData.confirm_password} onChange={handleChange} required />
+                    </label><br/>
+                    
+                    <input type="text" id="latitude" name="latitude" value={formData.latitude} readOnly hidden />
+                    <input type="text" id="longitude" name="longitude" value={formData.longitude} readOnly hidden />
+
+                    {formData.latitude && formData.longitude ? (
+                      <button type="submit">Register</button>
+                    ) : (
+                      <button type="button" onClick={handleSetAddress}>Set Home Address</button>
+                    )}
+
+                    <div className='flex-nav'>
+                      <Link to='/auth/user/login' className='log'>Already have an account?</Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          ) : showMap ? (
+            <div className="map-popup">
+              <div id="map-container" style={{ height: "400px", width: "100%" }}></div>
+              <button onClick={handleConfirmLocation} className='map-popup-btn'>Confirm Location</button>
+            </div>
+          ) : (
+            <div className="camera-popup">
+              <video ref={videoRef} autoPlay playsInline style={{ width: '100%', maxHeight: '400px' }} />
+              <div className="camera-controls">
+                <button type="button" onClick={toggleCamera}>Switch Camera</button>
+                <button type="button" onClick={captureSelfie}>Take Photo</button>
+                <button type="button" onClick={() => {
+                  stopCamera();
+                  setShowCamera(false);
+                  setShowMap(true);
+                }}>Cancel</button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </PageTransition>
+  );
+};
+
+export default UserRegister;

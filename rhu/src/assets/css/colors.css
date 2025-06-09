@@ -1,0 +1,11 @@
+:root{
+  --bg: #f9f9f9;
+  --blue: #0339A8;
+  --light-blue: #4C92DB;
+  --fade: #B8CDF8;
+  --gray: #828282;
+  --border: rgba(0,0,0,0.2);
+  --danger: #C20B0D;
+  --success: #0BB94E;
+  --white: #FFFFFF;
+}

@@ -1,0 +1,100 @@
+nav{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+nav .search-all .search-bar{
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  padding: 12px;
+  border-radius: 100px;
+  margin: 1px;
+  background-color: var(--white);
+}
+nav .search-all input{
+  height: 100%;
+  border: none;
+  outline: none;
+  margin: 0 12px;
+  font-size: .9em;
+}
+nav .search-all .search-mic{
+  cursor: pointer;
+}
+nav .search-all .search-bar:focus-within {
+  outline: 1px solid var(--red);
+}
+nav .search-all .search-mic:focus {
+  outline: none;
+}
+nav .controls{
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 0;
+}
+nav .controls button.export img{
+  margin-right: 8px;
+}
+nav .controls .calendar{
+  position: relative;
+  background-color: var(--red-fade);
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+nav .controls .calendar .year-semester-dropdown{
+  display: flex;
+  align-items: center;
+}
+nav .controls .calendar .year-semester-dropdown select{
+  outline: none;
+  background-color: var(--white);
+  width: calc(100% - 24px);
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.2);
+  font-size: 1em;
+  margin-left: 8px;
+  transition: .2s ease-in-out;
+  cursor: pointer;
+}
+nav .controls .calendar .year-semester-dropdown select:hover{
+  border: 1px solid var(--red);
+}
+nav .controls button.export{
+  background-color: var(--red);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border: none;
+  outline: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: .9em;
+  margin-left: 12px;
+}
+nav .controls .profile-pic{
+  height: 40px;
+  width: 40px;
+  background-color: #D9D9D9;
+  border-radius: 50px;
+  margin-left: 12px;
+  display: flex;                  
+  align-items: center;            
+  justify-content: center; 
+}
+nav .controls .profile-pic img{
+  height: 100%;
+  width: 100%;
+  border-radius: 50%; 
+  object-fit: cover;
+}
+.speech-indicator{
+  color: var(--line);
+  font-size: .8em;
+}

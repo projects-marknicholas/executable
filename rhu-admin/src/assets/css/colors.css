@@ -1,0 +1,22 @@
+:root{
+  --danger: #DC3545;
+  --success: #0BB94E;
+  --view: #F1B50F;
+  --lightblue: #35AFDC;
+  --red: #033baa;
+  --white: #FFFFFF;
+  --black: #262626;
+  --red-fade: #b4bfff;
+  --theme-g-btn: #F4F4F4;
+  --gray: #474747;
+  --line: rgba(0,0,0,0.2);
+  --rgba: rgba(0,0,0,0.8);
+  --grey: grey;
+  --red-svg: brightness(0) saturate(100%) invert(14%) sepia(69%) saturate(4634%) hue-rotate(220deg) brightness(85%) contrast(98%);
+  --white-svg: brightness(0) saturate(100%) invert(93%) sepia(94%) saturate(0%) hue-rotate(248deg) brightness(106%) contrast(106%);
+}
+
+::selection{
+  background-color: var(--red);
+  color: var(--white);
+}

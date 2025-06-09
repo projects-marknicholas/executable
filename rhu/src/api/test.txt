@@ -1,0 +1,162 @@
+public function report_symptoms() {
+    global $conn;
+    date_default_timezone_set('Asia/Manila');
+    $response = array();
+  
+    // Create a new instance for API key validation
+    $api_key = new SecurityKey($conn);
+    $api_response = $api_key->validateBearerToken();
+    
+    if ($api_response['status'] === 'error') {
+      echo json_encode($api_response);
+      return;
+    }
+    
+    // Check if the user's role is 'user'
+    if ($api_response['role'] !== 'user') {
+      echo json_encode([
+        'status' => 'error', 
+        'message' => 'Unauthorized access'
+      ]);
+      return;
+    }
+  
+    $symptoms_id = bin2hex(random_bytes(16));
+    $data = json_decode(file_get_contents("php://input"), true);
+    $user_id = htmlspecialchars(isset($_GET['uid']) ? $_GET['uid'] : '');
+    $symptoms = htmlspecialchars(isset($data['symptoms']) ? $data['symptoms'] : '');
+    $symptoms_description = htmlspecialchars(isset($data['symptoms_description']) ? $data['symptoms_description'] : '');
+    $reporting_location = htmlspecialchars(isset($data['reporting_location']) ? $data['reporting_location'] : '');
+    $date_experienced = htmlspecialchars(isset($data['date_experienced']) ? $data['date_experienced'] : '');
+    $time_experienced = htmlspecialchars(isset($data['time_experienced']) ? $data['time_experienced'] : '');
+    $name = isset($data['name']) ? $data['name'] : [];
+    $created_at = date('Y-m-d H:i:s');
+  
+    // Validation for required fields
+    if (empty($user_id)) {
+      $response['status'] = 'error';
+      $response['message'] = 'User ID cannot be empty';
+      echo json_encode($response);
+      return;
+    }
+  
+    // Check if user_id exists in the database
+    $stmt = $conn->prepare("SELECT COUNT(*) as user_count FROM users WHERE user_id = ?");
+    if ($stmt === false) {
+      $response['status'] = 'error';
+      $response['message'] = 'Failed to prepare the SQL statement for user check.';
+      echo json_encode($response);
+      return;
+    }
+    $stmt->bind_param("s", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user_data = $result->fetch_assoc();
+  
+    if ($user_data['user_count'] == 0) {
+      $response['status'] = 'error';
+      $response['message'] = 'User ID does not exist in the database';
+      echo json_encode($response);
+      return;
+    }
+    if (empty($symptoms)) {
+      $response['status'] = 'error';
+      $response['message'] = 'Symptoms cannot be empty';
+      echo json_encode($response);
+      return;
+    }
+    if (empty($symptoms_description)) {
+      $response['status'] = 'error';
+      $response['message'] = 'Symptoms Description cannot be empty';
+      echo json_encode($response);
+      return;
+    }
+    if (empty($reporting_location)) {
+      $response['status'] = 'error';
+      $response['message'] = 'Reporting Location cannot be empty';
+      echo json_encode($response);
+      return;
+    }
+    // if (empty($date_experienced)) {
+    //   $response['status'] = 'error';
+    //   $response['message'] = 'Date Experienced cannot be empty';
+    //   echo json_encode($response);
+    //   return;
+    // }
+    // if (empty($time_experienced)) {
+    //   $response['status'] = 'error';
+    //   $response['message'] = 'Time Experienced cannot be empty';
+    //   echo json_encode($response);
+    //   return;
+    // }
+    if (empty($name) || !is_array($name)) {
+      $response['status'] = 'error';
+      $response['message'] = 'Name cannot be empty and must be an array';
+      echo json_encode($response);
+      return;
+    }
+
+    foreach ($name as $item) {
+      if (!isset($item['name']) || !isset($item['address'])) {
+        $response['status'] = 'error';
+        $response['message'] = 'Each item in the name array must have a name and address';
+        echo json_encode($response);
+        return;
+      }
+
+      $name_value = htmlspecialchars($item['name']);
+      $address = htmlspecialchars($item['address']);
+
+      // Convert address to latitude and longitude using OpenStreetMap API
+      $geo_data = $this->getCoordinatesFromAddress($address);
+      if (!$geo_data) {
+        echo json_encode(['status' => 'error', 'message' => 'Failed to retrieve coordinates for the address']);
+        return;
+      }
+
+      $latitude = $geo_data['lat'];
+      $longitude = $geo_data['lon'];
+
+      // Insert into symptoms table
+      $sql = "INSERT INTO symptoms 
+      (symptoms_id, user_id, symptoms, symptoms_description, reporting_location, 
+      date_experienced, time_experienced, name, address, latitude, longitude, created_at) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      $stmt = $conn->prepare($sql);
+      if ($stmt === false) {
+        $response['status'] = 'error';
+        $response['message'] = 'Failed to prepare the SQL statement for symptoms insertion: ' . $conn->error;
+        echo json_encode($response);
+        return;
+      }
+      $stmt->bind_param(
+        'ssssssssssss', 
+        $symptoms_id, 
+        $user_id, 
+        $symptoms, 
+        $symptoms_description, 
+        $reporting_location, 
+        $date_experienced, 
+        $time_experienced, 
+        $name_value, 
+        $address, 
+        $latitude,
+        $longitude,
+        $created_at
+      );
+    
+      if ($stmt->execute()) {
+        $response['status'] = 'success';
+        $response['message'] = 'Symptoms added successfully!';
+      } else {
+        $response['status'] = 'error';
+        $response['message'] = 'Failed to add symptoms: ' . $stmt->error;
+        echo json_encode($response);
+        return;
+      }
+    
+      $stmt->close();
+    }
+  
+    echo json_encode($response);
+  }

@@ -1,0 +1,192 @@
+.modal-overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(3, 59, 170, .5);
+  height: 100%;
+  width: 100%;
+}
+.modal-overlay .modal-content{
+  background-color: var(--white);
+  width: calc(700px - 40px);
+  padding: 20px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.5);
+}
+.modal-overlay .modal-content .modal-header{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.modal-overlay .modal-content .modal-header h1{
+  font-size: 1.2em;
+}
+.modal-overlay .modal-content .modal-header button{
+  margin-left: auto;
+  margin-right: 0;
+  height: 30px;
+  width: 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1.3em;
+  border: 1px solid rgba(0,0,0,0.2);
+  background-color: rgba(0,0,0,0.05);
+  font-weight: normal;
+  color: rgba(0,0,0,0.5);
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  width: 600px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 15px;
+}
+
+.modal-header h1 {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #333;
+}
+
+.close-modal {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s;
+}
+
+.close-modal:hover {
+  color: #333;
+}
+
+.modal-input {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.modal-input .item,
+.modal-input .item span{
+  display: block;
+}
+
+.modal-input .item span{
+  font-size: .8em;
+  font-style: italic;
+  opacity: .6;
+  margin-bottom: 5px;
+}
+
+.modal-input .item input,
+.body-textarea,
+.modal-input .item select{
+  width: calc(100% - 24px);
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 8px;
+  outline: none;
+}
+.modal-input .item select{
+  width: 100%;
+}
+
+.body-textarea{
+  width: calc(100% - 40px);
+}
+
+.modal-input .item input:focus,
+.body-textarea:focus,
+.modal-input .item select:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.body-textarea{
+  margin-top: 12px;
+}
+
+.modal-info table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modal-info td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 1em;
+  color: #555;
+}
+
+.modal-info img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.google-maps-btn,
+.view-pop-result-btn button.submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--red);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  margin-top: 12px;
+}
+
+.google-maps-btn:hover {
+  background-color: #357ae8;
+}
+
+.google-maps-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.view-pop-result-btn{
+  display: flex;
+  align-items: center;
+}
+.view-pop-result-btn button{
+  margin-right: 12px;
+}

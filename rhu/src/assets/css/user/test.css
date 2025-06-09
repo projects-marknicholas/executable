@@ -1,0 +1,74 @@
+.login-form form .login-form-profile span{
+  display: block;
+  margin: auto;
+  width: fit-content;
+  margin-top: 20px;
+  background-color: rgba(0,0,0,0.05);
+  height: 70px;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+}
+.login-form form .login-form-profile span img{
+  height: 50px;
+}
+.login-form form .login-form-profile h3{
+  display: block;
+  margin: auto;
+  width: fit-content;
+  text-align: center;
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 1.4em;
+}
+.login-form form .input-form-group{
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+}
+.login-form form .input-form-group label span{
+  opacity: .8;
+  font-weight: 600;
+  font-size: .8em;
+}
+.login-form form .input-form-group .input-flex-group{
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  border-radius: 50px;
+  border: 1px solid rgba(0,0,0,0.5);
+  margin-bottom: 0px;
+  width: calc(100% - 18px);
+  padding: 12px 8px;
+}
+.login-form form .input-form-group label input{
+  border: none;
+  width: 100%;
+  outline: none;
+  margin-left: 12px;
+  background-color: transparent;
+}
+.login-form form .input-form-group button{
+  width: 100%;
+  display: block;
+  font-size: 0.868em;
+  padding: 12px;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: var(--blue);
+  color: var(--white);
+}
+.login-form form .input-form-group a{
+  display: block;
+  margin: auto;
+  text-align: center;
+  margin-top: 12px;
+  color: var(--blue);
+  font-size: .868em;
+  text-decoration: none;
+}

@@ -1,0 +1,374 @@
+/* Base Button Styles */
+.add-btn-st {
+  position: absolute;
+  top: 100px;
+  right: 30px;
+  padding: 8px 20px;
+  cursor: pointer;
+  background-color: var(--red);
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: var(--white);
+}
+
+/* Category Select */
+.category-select {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.category-select select {
+  outline: none;
+  background-color: var(--white);
+  width: 100px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.2);
+  font-size: 1em;
+  cursor: pointer;
+}
+
+/* Table Container */
+.table-holder {
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background-color: var(--white);
+  overflow: hidden;
+}
+
+/* Table Header */
+.table-holder .table-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+}
+
+.table-holder .table-header .table-btns a {
+  text-decoration: none;
+  color: var(--white);
+  background-color: var(--red);
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+.table-holder .table-header a.add {
+  text-decoration: none;
+  color: var(--white);
+  background-color: var(--green);
+  font-size: 0.868em;
+  margin-left: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Search Bar */
+.table-holder .table-header .search-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  margin-left: auto;
+  border: 1px solid var(--line);
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.table-holder .table-header .search-bar:focus-within {
+  outline: 1px solid var(--red);
+}
+
+.table-holder .table-header .search-bar svg {
+  height: 20px;
+  color: #a19e9e;
+}
+
+.table-holder .table-header .search-bar input {
+  border: none;
+  outline: none;
+  font-size: 0.868em;
+  margin-left: 8px;
+  width: 100%;
+}
+
+.table-holder .table-header .search-bar input::placeholder {
+  color: #a19e9e;
+}
+
+/* Table Content */
+.table-holder .table-scrolling {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+.table-holder .table-scrolling table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Ensures table doesn't collapse too much */
+}
+
+.table-holder .table-scrolling table thead {
+  background-color: #eeeeee;
+}
+
+.table-holder .table-scrolling table thead tr th {
+  padding: 12px;
+  font-size: 0.868em;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.table-holder .table-scrolling table tbody tr td {
+  padding: 12px 8px;
+  font-size: 0.868em;
+  color: var(--theme-gray);
+  white-space: nowrap;
+  border: none;
+  text-align: left;
+}
+
+.table-holder .table-scrolling table tbody tr td select {
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.table-holder .table-scrolling table tbody tr td img {
+  height: 30px;
+  border-radius: 5px;
+}
+
+/* Action Buttons */
+.table-holder .table-scrolling table tbody tr td.action-field {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 5px;
+  width: 100%;
+}
+
+.table-holder .table-scrolling table tbody tr td a {
+  color: var(--black);
+  font-weight: bold;
+}
+
+.table-holder .table-scrolling table tbody tr td button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--theme-gray);
+  margin: 2px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 8px;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.table-holder .table-scrolling table tbody tr td button img {
+  margin-right: 8px;
+  height: 16px;
+}
+
+.table-holder .table-scrolling table tbody tr td button.accept {
+  background-color: var(--success);
+  color: var(--white);
+}
+
+.table-holder .table-scrolling table tbody tr td button.decline {
+  background-color: var(--danger);
+  color: var(--white);
+}
+
+.decline-span{
+  background-color: var(--danger);
+  color: var(--white);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.table-holder .table-scrolling table tbody tr td button.view {
+  background-color: var(--view);
+  color: var(--white);
+}
+
+.table-holder .table-scrolling table tbody tr td button.print {
+  background-color: var(--lightblue);
+  color: var(--white);
+}
+
+/* Table Footer */
+.table-holder .table-footer {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  font-size: 0.938em;
+  font-weight: 500;
+  color: var(--theme-gray);
+}
+
+.table-holder .table-footer .center {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.table-holder .table-footer .center select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.2);
+  outline: none;
+  font-size: 0.868em;
+  width: 100%;
+  max-width: 200px;
+}
+
+.table-holder .table-footer .center select:focus {
+  outline: 2px solid var(--red);
+}
+
+.table-holder .table-footer .right {
+  text-align: center;
+}
+
+.table-holder .table-footer .ck-btn {
+  display: flex;
+  justify-content: center;
+}
+
+/* Load More Button */
+.table-holder .table-scrolling table tbody tr td button.load-more,
+.load-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--white);
+  margin: 12px auto;
+  background-color: var(--lightblue);
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 8px 16px;
+  width: fit-content;
+}
+
+/* Status Badges */
+.table-holder .table-scrolling table tbody tr td span.verified,
+.table-holder .table-scrolling table tbody tr td span.unverified,
+.symptom-no, 
+.symptom-yes {
+  display: block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+  font-size: 0.866em;
+  text-align: center;
+  width: fit-content;
+  text-transform: capitalize;
+  margin: 0 auto;
+}
+
+.table-holder .table-scrolling table tbody tr td span.verified {
+  background-color: var(--success);
+}
+
+.table-holder .table-scrolling table tbody tr td span.unverified {
+  background-color: var(--danger);
+}
+
+.symptom-no {
+  background-color: #dc3545;
+}
+
+.symptom-yes {
+  background-color: #28a745;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .add-btn-st {
+    position: static;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .category-select {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .category-select select {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .table-holder .table-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .table-holder .table-header .search-bar {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .table-holder .table-footer {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .table-holder .table-footer .right {
+    text-align: center;
+  }
+
+  .table-holder .table-footer .ck-btn {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-holder .table-scrolling table tbody tr td.action-field {
+    grid-template-columns: 1fr;
+  }
+
+  .table-holder .table-scrolling table tbody tr td button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .table-holder .table-header a.add {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .table-holder .table-scrolling table thead tr th,
+  .table-holder .table-scrolling table tbody tr td {
+    padding: 8px 4px;
+    font-size: 0.8em;
+  }
+
+  .table-holder .table-scrolling table tbody tr td button img {
+    margin-right: 4px;
+  }
+}

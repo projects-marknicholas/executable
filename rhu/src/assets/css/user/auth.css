@@ -1,0 +1,162 @@
+.user .main-log{
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+  background: 
+  linear-gradient(rgba(3, 57, 168, .8), rgba(3, 57, 168, .8)), 
+  url('../../img/user-hero-bg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+.user .main-log .top{
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user .main-log .top .app .logo{
+  height: 80px;
+  width: 80px;
+  border-radius: 8px;
+  background-color: var(--gray);
+  margin: auto;
+  overflow: hidden;
+}
+.user .main-log .top .app .logo img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.user .main-log .top .app .app-name{
+  text-align: center;
+  margin: auto;
+  margin-top: 8px;
+  font-size: 1.2em;
+  color: var(--white);
+  font-size: 1.2em;
+  font-weight: 500;
+}
+.user .main-log .bottom{
+  flex-grow: 1;
+  position: relative;
+  overflow: auto;
+}
+.user .main-log .bottom .under{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 40px);
+  padding: 20px;
+  overflow: auto;
+}
+.user .main-log .bottom .under .form-group label{
+  color: var(--white);
+  font-size: .868em;
+}
+.user .main-log .bottom .under .form-group label input{
+  width: calc(100% - 16px);
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1em;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.user .main-log .bottom .under .form-group button,
+.map-popup-btn{
+  width: 100%;
+  padding: 8px;
+  background-color: var(--light-blue);
+  color: var(--white);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-top: 12px;
+  border-radius: 8px;
+  font-size: .868em;
+}
+.user .main-log .bottom .under .form-group .flex-nav{
+  display: flex;
+  align-items: center;
+}
+.user .main-log .bottom .under .form-group .flex-nav a{
+  text-decoration: none;
+  font-size: .868em;
+  color: var(--white);
+  margin-top: 8px;
+}
+.user .main-log .bottom .under .form-group .flex-nav .log{
+  margin-left: auto;
+  margin-right: 0;
+}
+.user .main-log .bottom .under .divider{
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+}
+.user .main-log .bottom .under .divider .left-line,
+.user .main-log .bottom .under .divider .right-line{
+  height: 1px;
+  width: 100%;
+  border-top: 1px solid var(--white);
+  opacity: .3;
+}
+.user .main-log .bottom .under .divider span{
+  margin: 0 12px;
+  color: var(--white);
+}
+.user .main-log .bottom .under .google-sign button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+  width: 100%;
+  padding: 8px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: .868em;
+}
+.user .main-log .bottom .under .google-sign button img{
+  height: 20px;
+  margin-right: 12px;
+}
+.map-popup {
+  width: calc(100% - 40px);
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.main-log {
+  position: relative;
+  min-height: 500px; /* Or whatever height works for your layout */
+}
+
+
+
+
+.location-confirmed,
+.selfie-preview span{
+  margin: 12px 0;
+  color: var(--white);
+  background-color: var(--success);
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+}
+.selfie-preview span{
+  display: block;
+}
+.selfie-preview img{
+  display: block;
+}
+.camera-instructions{
+  text-align: center;
+}

@@ -1,0 +1,84 @@
+.settings{
+  height: 100vh;
+  padding: 20px;
+  background-color: var(--bf);
+}
+.settings .set{
+  display: flex;
+  align-items: center;
+}
+.settings .set .set-bg{
+  height: 50px;
+  width: 50px;
+  border-radius: 12px;
+  background-color: var(--fade);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+.settings .set div h1{
+  font-size: 1.5em;
+}
+.settings .set div p{
+  font-size: .868em;
+  margin-top: 2px;
+}
+.settings .setup{
+  margin-top: 30px;
+  padding: 20px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 12px;
+  background-color: var(--white);
+}
+.settings .setup .head{
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+.settings .setup .head svg{
+  margin-right: 12px;
+}
+.settings .setup .input-2{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.settings .setup .input-1{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.settings .setup .input-2 label span,
+.settings .setup .input-1 label span{
+  font-size: .868em;
+  font-style: italic;
+  opacity: .7;
+  display: block;
+  margin-bottom: 5px;
+}
+.settings .setup .input-2 label input,
+.settings .setup .input-1 label input{
+  width: calc(100% - 26px);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+.settings .setup button{
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  color: var(--white);
+  background-color: var(--blue);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: .868em;
+}

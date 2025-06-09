@@ -1,0 +1,193 @@
+/* Auth */
+.auth{
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+  background: 
+    linear-gradient(rgba(3, 59, 170, .6), rgba(3, 59, 170, .2)),
+    url('../img/background.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.auth .log-form{
+  width: calc(450px - 80px);
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-radius: 16px;
+  padding: 26px 40px;
+  background: rgba( 255, 255, 255, 0.8 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 10px );
+  -webkit-backdrop-filter: blur( 10px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.auth .log-form .header img{
+  height: 80px;
+  display: block;
+  margin: auto;
+}
+.auth .log-form .header a.auth{
+  text-decoration: none;
+  color: var(--red);
+  text-transform: uppercase;
+}
+.auth .log-form .header h1{
+  text-align: center;
+  font-size: 1.1em;
+  margin-top: 12px;
+}
+.auth .log-form .header p{
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+  font-weight: 500;
+}
+.auth .log-form .header p a{
+  text-decoration: none;
+  color: var(--red);
+}
+.auth .log-form .header p a:hover,
+.auth .log-form .form-group label .flex-label a:hover{
+  text-decoration: underline;
+}
+.auth .log-form .form-group{
+  margin-top: 30px;
+} 
+.auth .log-form .form-group label .flex-label p{
+  color: var(--text-label);
+  font-size: .968em;
+}
+.auth .log-form .form-group label  .flex-label p span{
+  color: var(--red);
+  font-weight: bold;
+}
+.auth .log-form .form-group label .flex-label{
+  display: flex;
+  align-items: center;
+}
+.auth .log-form .form-group label .flex-label a{
+  margin-left: auto;
+  margin-right: 0;
+  text-decoration: none;
+  font-size: .868em;
+  margin-top: 8px;
+  font-weight: 500;
+  color: var(--red);
+}
+.auth .log-form .form-group label .flex-label span{
+  font-size: .968em;
+  color: rgba(0,0,0,0.5);
+  margin-left: auto;
+  margin-right: 0;
+  margin-top: 8px;
+}
+.auth .log-form .form-group label input,
+.auth .log-form .form-group label .password-input{
+  outline: none;
+  background-color: var(--white);
+  width: calc(100% - 24px);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.2);
+  margin-top: 12px;
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+.auth .log-form .form-group label .password-input{
+  width: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+.auth .log-form .form-group label .password-input input{
+  border-radius: 12px;
+  outline: none;
+  border: none;
+  width: 100%;
+  font-size: 1em;
+  padding: 12px;
+  margin: 0;
+}
+.auth .log-form .form-group label .password-input button{
+  background: transparent;
+  border: none;
+  outline: none;
+  border-left: 1px solid rgba(0,0,0,0.2);
+  padding: 8px;
+  cursor: pointer;
+}
+.auth .log-form .form-group label .password-input button img{
+  height: 15px;
+  width: 20px;
+}
+
+.auth .log-form .sign{
+  margin-top: 30px;
+}
+.auth .log-form .sign.forgot{
+  margin: 0;
+}
+.auth .log-form .sign .sign-m{
+  width: 100%;
+  background-color: var(--red);
+  font-weight: 500;
+  color: var(--white);
+  font-size: 1em;
+  padding: 8px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.auth .log-form .sign .sign-g{
+  width: 100%;
+  background-color: var(--theme-g-btn);
+  border: 1px solid rgba(0,0,0,0.2);
+  color: var(--black);
+  padding: 8px;
+  font-size: 1em;
+  outline: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.auth .log-form .sign .sign-mic{
+  width: 100%;
+  background-color: var(--theme-g-btn);
+  border: 1px solid rgba(0,0,0,0.2);
+  color: var(--black);
+  padding: 8px;
+  font-size: 1em;
+  outline: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 12px;
+}
+.auth .log-form .sign .sign-g div,
+.auth .log-form .sign .sign-mic div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: auto;
+}
+.auth .log-form .sign .sign-g img,
+.auth .log-form .sign .sign-mic img{
+  height: 20px;
+  margin-right: 12px;
+}
+.auth .log-form .sign .or{
+  text-align: center;
+  margin: 20px 0;
+  font-size: .868em;
+  color: var(--theme-gray);
+}
+@media (max-width: 768px){
+  .auth .log-form{
+    width: calc(100% - 40px);
+    padding: 20px;
+    border-radius: 0px;
+  }
+}
