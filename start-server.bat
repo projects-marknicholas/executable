@@ -54,6 +54,11 @@ if exist "node_modules\" (
 start cmd /k "npm start & echo. & echo === RHU Test Account === & echo Email: testuser@gmail.com & echo Password: Test123"
 cd ..
 
+echo.
+echo RHU is now starting in a separate terminal window.
+echo Please wait for it to fully load, then press any key to continue to RHU-ADMIN...
+pause >nul
+
 :: === RHU-ADMIN ===
 echo Setting up RHU-ADMIN...
 cd rhu-admin
