@@ -56,6 +56,7 @@ cd ..
 
 echo.
 echo RHU is now starting in a separate terminal window.
+echo === RHU Test Account === & echo Email: testuser@gmail.com & echo Password: Test123 
 echo Please wait for it to fully load, then press any key to continue to RHU-ADMIN...
 pause >nul
 
@@ -72,4 +73,5 @@ start cmd /k "npm start & echo. & echo === RHU-ADMIN Test Account === & echo Ema
 cd ..
 
 echo All setup complete.
+  echo === RHU-ADMIN Test Account === & echo Email: testadmin@gmail.com & echo Password: Test123
 pause
